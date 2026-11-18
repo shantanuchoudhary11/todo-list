@@ -1,3 +1,4 @@
 import "./styles.css";
+import * as app from "./app.js";
 
-console.log("Todo app loaded");
+app.init();
