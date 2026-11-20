@@ -4,8 +4,104 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List</title>
+    <link rel="icon" href="data:," />
   </head>
   <body>
-    <div id="app"></div>
+    <div class="layout">
+      <!-- Left side: list of projects -->
+      <aside class="sidebar">
+        <h1 class="app-title">Todo List</h1>
+
+        <!-- dom.js fills this list with one button per project -->
+        <ul id="project-list" class="project-list"></ul>
+
+        <form id="new-project-form" class="inline-form">
+          <input
+            id="new-project-name"
+            placeholder="New project"
+            aria-label="New project name"
+            autocomplete="off"
+            required
+          />
+          <button type="submit">Add</button>
+        </form>
+      </aside>
+
+      <!-- Right side: the selected project and its todos -->
+      <main class="main">
+        <header class="project-header">
+          <input
+            id="project-name"
+            class="project-name"
+            aria-label="Project name"
+            autocomplete="off"
+          />
+          <button id="delete-project" type="button" class="button-danger">
+            Delete project
+          </button>
+        </header>
+
+        <p id="error" class="error" role="alert" hidden></p>
+
+        <form id="new-todo-form" class="new-todo-form">
+          <input
+            id="new-todo-title"
+            placeholder="What needs doing?"
+            aria-label="Todo title"
+            autocomplete="off"
+            required
+          />
+          <input id="new-todo-due-date" type="date" aria-label="Due date" />
+          <select id="new-todo-priority" aria-label="Priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <button type="submit" class="button-primary">Add todo</button>
+        </form>
+
+        <!-- dom.js fills this list with one copy of #todo-template per todo -->
+        <ul id="todo-list" class="todo-list"></ul>
+
+        <p id="empty-message" class="empty-state" hidden>
+          No todos here yet. Add one above.
+        </p>
+      </main>
+    </div>
+
+    <!--
+      What one todo looks like. A <template> is not shown on the page;
+      dom.js makes a copy of it for each todo and fills in the values.
+    -->
+    <template id="todo-template">
+      <li class="todo">
+        <div class="todo-row">
+          <div class="todo-main">
+            <input type="checkbox" class="todo-done" aria-label="Done" />
+            <input class="todo-title" aria-label="Title" autocomplete="off" />
+          </div>
+          <div class="todo-meta">
+            <select class="todo-priority" aria-label="Priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+            <input type="date" class="todo-due-date" aria-label="Due date" />
+            <button type="button" class="todo-delete" aria-label="Delete todo">×</button>
+          </div>
+        </div>
+        <!-- dom.js writes "Due in 3 days" / "Overdue by 2 days" here -->
+        <span class="todo-due-label"></span>
+        <details class="todo-details">
+          <summary>Notes</summary>
+          <textarea
+            class="todo-notes"
+            aria-label="Notes"
+            placeholder="Add notes…"
+            rows="3"
+          ></textarea>
+        </details>
+      </li>
+    </template>
   </body>
 </html>
